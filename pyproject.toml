@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "aoc24"
+version = "0.1.0"
+description = ""
+authors = ["Lewis Oaten <lewis@oaten.name>"]
+license = "LICENSE"
+readme = "README.md"
+include = [
+    { path = "inputs/*.txt", format = ["sdist", "wheel"] }
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.scripts]
+aoc24 = "aoc24.app:run"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
