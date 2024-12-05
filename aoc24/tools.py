@@ -4,6 +4,14 @@ def read_to_string(file_path: str) -> str:
         return file.read().strip()
 
 
+def read_to_two_sections(file_path: str) -> str:
+    return str_to_two_sections(read_to_string(file_path))
+
+
+def str_to_two_sections(string: str) -> list[str]:
+    return string.split("\n\n")
+
+
 # 2d array stuff
 def read_to_int2d(file_path: str) -> list[list[int]]:
     with open(file_path) as file:
