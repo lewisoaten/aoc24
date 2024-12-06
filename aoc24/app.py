@@ -1,4 +1,5 @@
 import argparse
+import time
 from importlib import import_module
 
 
@@ -14,9 +15,12 @@ def run():
     parser.add_argument("stage", help="The challenge stage to be run.", type=int)
     args = parser.parse_args()
 
+    start_time = time.time()
     result = challenge(args.day, args.stage)()
+    end_time = time.time()
 
     print(f"Output for day {args.day} stage {args.stage} is: {result}")
+    print("--- %s seconds ---" % (end_time - start_time))
 
 
 if __name__ == "__main__":
