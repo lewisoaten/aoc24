@@ -41,8 +41,8 @@ def read_to_int2d(file_path: str) -> list[list[int]]:
         return [[int(i) for i in line.split()] for line in file.read().splitlines()]
 
 
-def str_to_char2d(input: str) -> list[list[str]]:
-    return [list(line) for line in input.splitlines()]
+def str_to_char2d(input: str) -> tuple[tuple[str]]:
+    return tuple(list(line) for line in input.splitlines())
 
 
 def read_to_char2d(file_path: str) -> list[list[str]]:
