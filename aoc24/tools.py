@@ -7,6 +7,10 @@ def read_to_string(file_path: str) -> str:
         return file.read().strip()
 
 
+def str_to_int1d(input: str) -> tuple[int]:
+    return [int(i) for i in input]
+
+
 def str_to_lines(string: str, process_line: Callable = str, process_line_kwargs: dict = {}) -> tuple:
     return tuple(process_line(line, **process_line_kwargs) for line in string.splitlines())
 
