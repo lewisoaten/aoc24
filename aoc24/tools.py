@@ -45,8 +45,16 @@ def read_to_int2d(file_path: str) -> list[list[int]]:
         return [[int(i) for i in line.split()] for line in file.read().splitlines()]
 
 
+def str_to_int2d(input: str) -> tuple[tuple[int]]:
+    return str_to_2d(input, int)
+
+
 def str_to_char2d(input: str) -> tuple[tuple[str]]:
     return tuple(list(line) for line in input.splitlines())
+
+
+def str_to_2d(input: str, convert_function: callable) -> tuple[tuple]:
+    return tuple(tuple(convert_function(i) for i in list(line)) for line in input.splitlines())
 
 
 def read_to_char2d(file_path: str) -> list[list[str]]:
@@ -60,3 +68,36 @@ def rotate_char2d(input: list[list[str]]) -> list[list[str]]:
 
 def copy_char2d_sub(input: list[list[str]], x: int, y: int, width: int, height: int) -> list[list[str]]:
     return [line[x : x + width] for line in input[y : y + height]]  # noqa: E203
+
+
+# 2d array to graph based on cost function
+def graph_from_2d(input: tuple[tuple[int]], cost_func: Callable) -> dict[tuple[int, int, int], list[tuple[int, int, int, int]]]:
+    graph = {}
+    for y in range(len(input)):
+        for x in range(len(input[y])):
+            graph[(x, y, input[y][x])] = []
+            if x > 0:
+                next_x = x - 1
+                next_y = y
+                cost = cost_func(input[y][x], input[next_y][next_x])
+                if cost is not None:
+                    graph[(x, y, input[y][x])].append((next_x, next_y, input[next_y][next_x], cost))
+            if x < len(input[y]) - 1:
+                next_x = x + 1
+                next_y = y
+                cost = cost_func(input[y][x], input[next_y][next_x])
+                if cost is not None:
+                    graph[(x, y, input[y][x])].append((next_x, next_y, input[next_y][next_x], cost))
+            if y > 0:
+                next_x = x
+                next_y = y - 1
+                cost = cost_func(input[y][x], input[next_y][next_x])
+                if cost is not None:
+                    graph[(x, y, input[y][x])].append((next_x, next_y, input[next_y][next_x], cost))
+            if y < len(input) - 1:
+                next_x = x
+                next_y = y + 1
+                cost = cost_func(input[y][x], input[next_y][next_x])
+                if cost is not None:
+                    graph[(x, y, input[y][x])].append((next_x, next_y, input[next_y][next_x], cost))
+    return graph
