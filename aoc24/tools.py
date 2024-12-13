@@ -22,6 +22,13 @@ def key_value_split(
     return process_key(key, **process_key_kwargs), process_value(values, **process_value_kwargs)
 
 
+def key_value_split_dict(
+    line: str, separator: str = "|", process_key: Callable = str, process_key_kwargs: dict = {}, process_value: Callable = str, process_value_kwargs: dict = {}
+) -> dict:
+    key, values = line.split(separator, 1)
+    return {process_key(key, **process_key_kwargs): process_value(values, **process_value_kwargs)}
+
+
 def item_split(
     line: str,
     separator: str = "|",
@@ -37,6 +44,14 @@ def read_to_two_sections(file_path: str) -> str:
 
 def str_to_two_sections(string: str) -> list[str]:
     return string.split("\n\n")
+
+
+def str_to_sections(
+    string: str,
+    process_sections: Callable = str,
+    process_sections_kwargs: dict = {},
+) -> tuple[str]:
+    return tuple(process_sections(value, **process_sections_kwargs) for value in string.split("\n\n"))
 
 
 # 2d array stuff
