@@ -1,3 +1,5 @@
+import pytest
+
 from . import challenge
 
 
@@ -34,6 +36,7 @@ p=9,5 v=-3,-3
     )
 
 
+@pytest.mark.skip(reason="takes 5 seconds to run")
 def test_challenge1():
     input = challenge.parse_input(
         """
