@@ -64,7 +64,7 @@ def str_to_int2d(input: str) -> tuple[tuple[int]]:
     return str_to_2d(input, int)
 
 
-def str_to_char2d(input: str) -> tuple[tuple[str]]:
+def str_to_char2d(input: str) -> tuple[list[str]]:
     return tuple(list(line) for line in input.splitlines())
 
 
