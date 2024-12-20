@@ -68,6 +68,10 @@ def str_to_char2d(input: str) -> tuple[list[str]]:
     return tuple(list(line) for line in input.splitlines())
 
 
+def char2d_to_str(char2d: tuple[list[str]]) -> str:
+    return "\n".join("".join(row) for row in char2d)
+
+
 def str_to_2d(input: str, convert_function: callable) -> tuple[tuple]:
     return tuple(tuple(convert_function(i) for i in list(line)) for line in input.splitlines())
 
